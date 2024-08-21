@@ -26,12 +26,17 @@ enum vga_color {
 	VGA_COLOR_YELLOW = 14,
 };
 
+extern char end;
+
 void get_cpu_vendor(char *vendor);
 int get_cpu_cores(void);
 int get_cpu_threads(void);
 uint64_t get_cpu_frequency(void);
 uint64_t get_ram_amount(void);
 void cpuid(int code, uint32_t *a, uint32_t *d);
+uint64_t get_ram_amount(void);
+void* kmalloc(size_t size);
+uint64_t get_used_memory(void);
 
 void terminal_initialize(void);
 void terminal_setcolor(uint8_t color);

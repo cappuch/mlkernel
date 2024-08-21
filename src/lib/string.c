@@ -128,7 +128,7 @@ int atoi(const char* str) {
     } else if (*str == '+') {
         str++;
     }
-    
+
     while (*str >= '0' && *str <= '9') {
         result = result * 10 + (*str - '0');
         str++;

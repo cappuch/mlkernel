@@ -8,6 +8,7 @@ void execute_command(const char* command) { // i will make it so each command is
         terminal_writestring("  help - help lol\n");
         terminal_writestring("  clear - cls or clear\n");
         terminal_writestring("  cpuinfo - display primitive CPU info\n");
+        terminal_writestring("  meminfo - display memory information\n");
     } else if (strcmp(command, "clear") == 0) {
         terminal_initialize();
     } else if (strcmp(command, "cpuinfo") == 0) {
@@ -23,6 +24,27 @@ void execute_command(const char* command) { // i will make it so each command is
         terminal_writestring("CPU Cores: ");
         terminal_writestring(buffer);
         terminal_writestring("\n");
+    } else if (strcmp(command, "meminfo") == 0) {
+        uint64_t total_ram = get_ram_amount();
+        uint64_t used_ram = get_used_memory();
+        
+        char buffer[32];
+        
+        terminal_writestring("Total RAM: ");
+        itoa(total_ram / 1024 / 1024, buffer, 10);
+        terminal_writestring(buffer);
+        terminal_writestring(" MB\n");
+        
+        terminal_writestring("Used RAM: ");
+        itoa(used_ram / 1024, buffer, 10);
+        terminal_writestring(buffer);
+        terminal_writestring(" KB\n");
+        
+        uint64_t free_ram = total_ram - used_ram;
+        terminal_writestring("Free RAM: ");
+        itoa(free_ram / 1024 / 1024, buffer, 10);
+        terminal_writestring(buffer);
+        terminal_writestring(" MB\n");
     } else {
         terminal_writestring("unk: ");
         terminal_writestring(command);
