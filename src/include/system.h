@@ -49,8 +49,9 @@ void init_keyboard(void);
 char keyboard_read(void);
 void update_cursor(int x, int y);
 
-
+// string related stuff
 size_t strlen(const char* str);
 char* itoa(int num, char* str, int base);
+int strcmp(const char* s1, const char* s2);
 
 #endif
