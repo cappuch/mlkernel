@@ -39,6 +39,12 @@ void terminal_writestring(const char* data);
 void terminal_putchar(char c);
 uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg);
 
+void set_graphics_mode();
+void set_text_mode();
+void draw_pixel(int x, int y, uint8_t color);
+void draw_line(int x1, int y1, int x2, int y2, uint8_t color);
+void clear_screen(uint8_t color);
+
 void init_keyboard(void);
 char keyboard_read(void);
 void update_cursor(int x, int y);
