@@ -4,6 +4,7 @@
 void kernel_main(void) 
 {
     terminal_initialize();
+    init_keyboard();
     terminal_setcolor(vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK));
     char vendor[13];
     get_cpu_vendor(vendor);
