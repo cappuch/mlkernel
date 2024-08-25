@@ -40,3 +40,16 @@ int get_cpu_threads(void) {
 void cpuid(int code, uint32_t *a, uint32_t *d) {
     asm volatile("cpuid" : "=a"(*a), "=d"(*d) : "a"(code) : "ecx", "ebx");
 }
+
+uint64_t get_ram_amount(void) {
+    uint32_t eax, ebx, ecx, edx;
+    uint64_t ram_amount = 0;
+
+    asm volatile("int $0x12" : "=a"(eax));
+    ram_amount = eax * 1024;
+
+    asm volatile("int $0x15" : "=a"(eax), "=c"(ecx), "=d"(edx) : "a"(0xE801));
+    ram_amount += (uint64_t)eax * 1024 + (uint64_t)ebx * 64 * 1024;
+
+    return ram_amount;
+}

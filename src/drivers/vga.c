@@ -71,6 +71,7 @@ void terminal_putchar(char c) {
                 terminal_scroll();
         }
     }
+    update_cursor(terminal_column, terminal_row);
 }
 
 void terminal_write(const char* data, size_t size) 
@@ -82,4 +83,14 @@ void terminal_write(const char* data, size_t size)
 void terminal_writestring(const char* data) 
 {
 	terminal_write(data, strlen(data));
+}
+
+void update_cursor(int x, int y)
+{
+    uint16_t pos = y * VGA_WIDTH + x;
+ 
+    outb(0x3D4, 0x0F);
+    outb(0x3D5, (uint8_t) (pos & 0xFF));
+    outb(0x3D4, 0x0E);
+    outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
 }
