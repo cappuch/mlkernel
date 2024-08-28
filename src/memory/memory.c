@@ -1,3 +1,7 @@
+//
+// TODO: Rework ALL of this
+//
+
 #include "system.h"
 
 static uint64_t allocated_memory = 0;
